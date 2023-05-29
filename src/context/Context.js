@@ -21,7 +21,7 @@ const Context = ({ children }) => {
   const [selectedComponent, setSelectedComponent] = useState("");
   const [showVal, setShowVal] = useState(true);
   const [confirmation, setConfirmation] = useState(false);
-  const [alignment, setAlignment] = useState('left');
+  const [alignment, setAlignment] = useState("left")
   // const [btnColor, setBtnColor] = useState('#002C3F');
 
   return (
@@ -49,8 +49,6 @@ const Context = ({ children }) => {
         setConfirmation,
         alignment,
         setAlignment,
-        // btnColor,
-        // setBtnColor,
       }}
     >
       {children}
@@ -59,3 +57,5 @@ const Context = ({ children }) => {
 };
 
 export default Context;
+
+

@@ -12,13 +12,9 @@ const Home = () => {
   console.log(confirmation);
   return (
     <>
-      {confirmation && <Confirmation /> && <Background />}
-      <div style={{ position: "sticky", top: "0" }}>
-        <Header />
-      </div>
-      <div
-        style={{ height: "100%", display: "flex", border: "1px solid black" }}
-      >
+      {confirmation  && <Background />}
+      {confirmation  && <Confirmation />}
+      <div style={{ height: "100%", display: "flex" }}>
         <div style={{ width: "66%" }}>
           <Display />
         </div>
@@ -28,16 +24,6 @@ const Home = () => {
           <Editor />
         </div>
       </div>
-
-      {/* <div style={{border:'2px solid red', height:'400px', display:'flex'}}>
-        <div style={{border:'2px solid black',width:'70%'}}></div>
-        <div style={{border:'2px solid black',width:'30%', display:'flex', direction:'column'}}>
-        <div style={{border:'2px solid blue',width:'70%', display:'flex', justifyContent:'center', alignItems:'center'}}>
-          <div style={{width:'500px', height:'200px', border:"2px solid green"}}></div>
-        </div>
-        <div style={{border:'2px solid blue',width:'30%'}}></div>
-        </div>
-      </div> */}
     </>
   );
 };

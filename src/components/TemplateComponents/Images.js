@@ -6,7 +6,15 @@ import { AiFillDelete } from "react-icons/ai";
 import { RiDragMove2Line } from "react-icons/ri";
 import { MdModeEditOutline } from "react-icons/md";
 
-const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
+const Images = ({
+  indexVal,
+  item,
+  imgsrc,
+  id,
+  imgName,
+  imgBtnUrl,
+  disableUrl,
+}) => {
   const [imgWidth, setImgWidth] = useState();
   const getMeta = (url, getWidth) => {
     const img = new Image();
@@ -16,11 +24,9 @@ const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
   };
 
   getMeta(imgsrc, (err, img) => {
-    // console.log(img.naturalWidth);
     setImgWidth(img.naturalWidth);
   });
   const [show, setShow] = useState(true);
-  // const [showBtn, setShowBtn] = useState(false);
   const {
     setEditorBtn,
     setFormatting,
@@ -32,6 +38,7 @@ const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
     selectedComponent,
     setSelectedComponent,
     showVal,
+    disable,
   } = useContext(Contentcontext);
 
   return (
@@ -39,39 +46,23 @@ const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
       style={{
         position: "relative",
         boxSizing: "border-box",
-        // width: "600px",
-        // margin: "auto",
-        // backgroundColor: "#ffffff",
-        // border:"1px solid red"
-        // border: show && "2px solid #74D1EA",
       }}
       onDragOver={(e) => {
         e.preventDefault();
-        // console.log(indexVal);
       }}
       onDragEnter={() => {
-        // setIndVal(indexVal);
         setShow(true);
-        // console.log("dragenter of image");
-        // console.log(indVal);
       }}
       onDragLeave={() => {
-        // setIndVal(-1);
         setShow(false);
-        // console.log("dragleave of Image");
-        // console.log(indVal);
       }}
       onDrop={() => {
-        // console.log("rop of image");
         let temp = [...arr];
         temp.splice(indVal, 1);
         setArr(temp);
         temp.splice(indexVal, 0, selectedComponent);
         setArr(temp);
-        // console.log(arr);
       }}
-      // draggable
-
       onMouseEnter={() => {
         setShow(true);
         console.log("Enterrring");
@@ -79,10 +70,8 @@ const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
       onMouseLeave={() => {
         setIndVal(-1);
         setShow(false);
-        // console.log(indVal);
       }}
     >
-      {/* div for drag and drop functionality to work and to make it able to hover over the buttons as well */}{" "}
       <div
         style={{
           position: "absolute",
@@ -169,47 +158,26 @@ const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
             draggable="true"
             onDragStart={() => {
               setIndVal(indexVal);
-              // console.log("dragging start");
               setSelectedComponent(item);
-              // console.log(selectedComponent);
             }}
             onDragEnd={() => {
               setIndVal(-1);
-              // console.log("dragging stop");
-              // let temp = [...arr];
-              // temp.splice(indexVal, 1);
-              // setArr(temp);
             }}
           >
             <RiDragMove2Line size="21px" />
           </div>
         </div>
       )}
-      {/* TODO:"Add your code here for the template" */}
-      {/* <table style={{ width: "600px", maxWidth: "600px" }}>
-        <tr style={{ width: "600px" }}>
-          <td style={{ width: "600px" }} width="600px">
-            <img
-              width="600px"
-              align="center"
-              style={{ maxWidth: "inherit", objectFit: "contain" }}
-              src={imgsrc || ImageIcon}
-              alt=" icon"
-            />
-          </td>
-        </tr>
-
-
-      </table> */}
-      {/* {console.log(imgWidth)} */}
       <table
-        width="600px"
+        className="image-wrapper-table"
         style={{
           width: "600px",
-          // border: "1px solid blue",
           backgroundColor: "#FFFFFF",
           textAlign: "center",
+          lineHeight: 0,
+          fontSize: 0,
         }}
+        width="600px"
         cellPadding="0"
         cellSpacing="0"
         align="center"
@@ -217,8 +185,8 @@ const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
         <tr
           style={{
             width: "600px",
-            padding: 0,
-            margin: 0,
+            // padding: 0,
+            // margin: 0,
             // border: "1px solid black",
           }}
         >
@@ -226,24 +194,49 @@ const Images = ({ indexVal, item, imgsrc, id, imgName }) => {
             style={{
               width: "600px",
               // border: "1px solid red",
-              padding: 0,
-              margin: 0,
+              // padding: 0,
+              // margin: 0,
             }}
             width="600"
             align="center"
           >
+            {disableUrl ? (
+              <img
+                width={imgWidth > 600 ? "600" : "auto"}
+                align="center"
+                style={{
+                  maxWidth: "600px",
+                  display: "flex",
+                  // verticalAlign: "middle",
+                  // border:'1px solid black'
+                }}
+                // border="1px solid red"
+                verticalAlign="middle"
+                src={imgsrc || ImageIcon}
+                alt=" icon"
+              />
+            ) : (
+              <a
+                href={imgBtnUrl}
+                // href="https://www.youtube.com/"
+                //  style={{ border: "1px solid red" }}
+              >
                 <img
                   width={imgWidth > 600 ? "600" : "auto"}
                   align="center"
                   style={{
                     maxWidth: "600px",
-                    display: "block",
-                    margin: 0,
-                    padding: 0,
+                    display: "flex",
+                    // verticalAlign: "middle",
+                    // border:'1px solid black'
                   }}
+                  // border="1px solid red"
+                  verticalAlign="middle"
                   src={imgsrc || ImageIcon}
                   alt=" icon"
                 />
+              </a>
+            )}
           </td>
         </tr>
       </table>
