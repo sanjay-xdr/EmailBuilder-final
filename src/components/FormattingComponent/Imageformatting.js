@@ -9,45 +9,116 @@ import { Contentcontext } from "../../context/Context";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import UploadIcon from "@mui/icons-material/Upload";
 import { v4 as uuidv4 } from "uuid";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const Imageformatting = () => {
   const [link, setLink] = useState("");
   const [imgTitle, setImgTitle] = useState("");
+  const [imgButtonLink, setImgButtonLink] = useState("");
+  const [disabledBtn, setDisabledBtn] = useState();
   const supabase = useSupabaseClient();
   const user = useUser();
 
-  const { arr, setArr, id } = useContext(Contentcontext);
+  const { arr, setArr, id, setEditorBtn } = useContext(Contentcontext);
+
+  const iOSStyleSwitchStyles = {
+    width: "42px",
+    height: "26px",
+    padding: "0",
+    "& .MuiSwitch-switchBase": {
+      padding: "0",
+      margin: "2px",
+      transitionDuration: "300ms",
+      "&.Mui-checked": {
+        transform: "translateX(16px)",
+        color: "#fff",
+        "& + .MuiSwitch-track": {
+          backgroundColor: "#65C466",
+          opacity: "1",
+          border: "0",
+        },
+        "&.Mui-disabled + .MuiSwitch-track": {
+          opacity: "0.5",
+        },
+      },
+      "&.Mui-focusVisible .MuiSwitch-thumb": {
+        color: "#33cf4d",
+        border: "6px solid #fff",
+      },
+      "&.Mui-disabled .MuiSwitch-thumb": {
+        color: "#E9E9EA",
+      },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: "0.7",
+      },
+    },
+    "& .MuiSwitch-thumb": {
+      boxSizing: "border-box",
+      width: "22px",
+      height: "22px",
+    },
+    "& .MuiSwitch-track": {
+      borderRadius: "13px",
+      backgroundColor: "#E9E9EA",
+      opacity: "1",
+      transition: "background-color 500ms",
+    },
+  };
 
   useEffect(() => {
     arr.map((item) => {
-      console.log(item);
+      // console.log(item);
       if (item.id === id) {
         setImgTitle(item.imgName);
-        if(!item.isUploaded){
-          setLink(item.componentValue)
+        setImgButtonLink(item.imgBtnUrl);
+        setDisabledBtn(item.disableUrl);
+        if (!item.isUploaded) {
+          setLink(item.componentValue);
+        } else {
+          setLink("");
         }
-     else{
-      setLink("")
-     }
         // return item;
       }
     });
   }, [id]);
 
+  const saveChanges = () => {
+    // console.log("btnColor value", btnColor);
+    let finalArray = arr.map((item) => {
+      // console.log(item);
+      if (item.id === id) {
+        // item.componentValue = url;
+        // item.imgName = localName;
+        item.isUploaded = true;
+        item.imgBtnUrl = imgButtonLink;
+        item.disableUrl = disabledBtn;
+        return item;
+      } else {
+        return item;
+      }
+    });
+
+    // console.log(finalArray, "Final Array");
+
+    setArr(finalArray);
+    setEditorBtn("s");
+  };
+
   async function getImages(name, localName) {
-    console.log(name);
+    // console.log(name);
     const { data, error } = await supabase.storage.from("Demo").list();
 
     if (data !== null) {
-      console.log(data);
-
       let url = `https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/${name}`;
       let finalArray = arr.map((item) => {
         if (item.id === id) {
           item.componentValue = url;
           item.imgName = localName;
-          item.isUploaded=true;
-          setImgTitle(item.imgName);
+          item.isUploaded = true;
+          item.imgBtnUrl = imgButtonLink;
+          // item.disableUrl = disabledBtn;
+          // setImgTitle(item.imgName);
           // setLink(item.componentValue)
           return item;
         } else {
@@ -61,33 +132,6 @@ const Imageformatting = () => {
   }
   const upoloadImage = async (e) => {
     let file = e.target.files[0];
-    // console.log("Uploading Image......");
-    // console.log(data);
-    // if (data == null) {
-    //   console.log("not able to upload it");
-    //   return;
-    // }
-
-    // const imageRef = ref(storage, `images/${data.target.files[0].name}`);
-    // console.log("Trying to upload it");
-    // uploadBytes(imageRef, data.target.files[0]).then((snapshot) => {
-    //   getDownloadURL(snapshot.ref).then((url) => {
-    //     console.log("I am here");
-    //     let finalArray = arr.map((item) => {
-    //       if (item.id === id) {
-    //         item.componentValue = url;
-    //         item.imgName = data.target.files[0].name;
-    //         setImgTitle(item.imgName);
-    //         return item;
-    //       } else {
-    //         return item;
-    //       }
-    //     });
-    //     setArr(finalArray);
-
-    //     console.log(url);
-    //   });
-    // });
     console.log("trying to upload images", file);
     const str = `/${e.target.files[0].name}  ${uuidv4()}`;
     const { data, error } = await supabase.storage
@@ -104,13 +148,6 @@ const Imageformatting = () => {
   const handleChange = (e) => {
     upoloadImage(e);
   };
-  // getImages("b9afd24d812a6d61769845416f139efcd6042914.jpeg")
-
-  // const  getSomething= async ()=>{
-  //   const { publicURL, error } = await supabase.storage.from('public-bucket').getPublicUrl('b9afd24d812a6d61769845416f139efcd6042914.jpeg')
-  //   console.log(publicURL);
-  // }
-  // getSomething();
 
   return (
     <Box
@@ -125,12 +162,10 @@ const Imageformatting = () => {
       }}
     >
       <button
-        // component="label"
         style={{
           color: "black",
           fontWeight: "bold",
           backgroundColor: "#E9ECEB",
-          border: "1px solid #B2B2B2",
           width: "81.6%",
           height: "48px",
           borderRadius: "4px",
@@ -138,6 +173,7 @@ const Imageformatting = () => {
           justifyContent: "center",
           alignItems: "center",
           fontSize: "14px",
+          border: "1px solid #B2B2B2",
         }}
       >
         <label
@@ -148,7 +184,6 @@ const Imageformatting = () => {
             alignItems: "center",
           }}
         >
-          {/* <FiUploadCloud size="24px" style={{ marginRight: "8px" }} /> */}
           <UploadIcon />
           {imgTitle === "Image" ? "Upload Image" : imgTitle}
           <input
@@ -171,7 +206,14 @@ const Imageformatting = () => {
       >
         OR
       </Box>
-      <Box sx={{ width: "81.6%", marginBottom: "28px" }}>
+      <Box
+        sx={{
+          width: "81.6%",
+          marginBottom: "28px",
+          marginBottom: "24px",
+          // border: "1px solid blue",
+        }}
+      >
         <Typography
           sx={{
             fontWeight: "bold",
@@ -201,7 +243,7 @@ const Imageformatting = () => {
             let finalArray = arr.map((item) => {
               if (item.id === id) {
                 item.componentValue = e.target.value;
-                item.isUploaded=false;
+                item.isUploaded = false;
                 setLink(item.componentValue);
                 return item;
               } else {
@@ -213,7 +255,105 @@ const Imageformatting = () => {
           placeholder="https://imagelinkexample.example.com"
         />
       </Box>
+      <hr
+        style={{
+          width: "81.6%",
+          marginBottom: "35.5px",
+          border: "1px solid #E9ECEB",
+        }}
+      />
       <Box
+        className="urltoimage-wrapper"
+        sx={{
+          width: "81.6%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "24px",
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            marginBottom: "8px",
+            fontSize: "16px",
+            lineHeight: "19px",
+            // border: "1px solid green",
+          }}
+        >
+          Add Url to image
+        </Typography>
+        <FormControlLabel
+          control={
+            <Switch
+              sx={{ m: 1, ...iOSStyleSwitchStyles }}
+              checked={!disabledBtn}
+              onChange={() => {
+                setDisabledBtn((prevVal) => {
+                  return !prevVal;
+                });
+              }}
+            />
+          }
+        />
+      </Box>
+      <Box
+        sx={{
+          width: "81.6%",
+          marginBottom: "28px",
+          marginBottom: "24px",
+          // border: "1px solid blue",
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            marginBottom: "8px",
+            fontSize: "16px",
+            lineHeight: "19px",
+          }}
+        >
+          Url
+        </Typography>
+        <input
+          style={{
+            color: "black",
+            fontWeight: "bold",
+            backgroundColor: "#F5F5F5",
+            border: "1px solid #B2B2B2",
+            width: "-webkit-fill-available",
+            height: "48px",
+            borderRadius: "8px",
+            fontSize: "16px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+          }}
+          value={imgButtonLink}
+          onChange={(e) => {
+            setImgButtonLink(e.target.value);
+          }}
+          disabled={disabledBtn}
+          type="text"
+          // value={link}
+          // onChange={(e) => {
+          //   let finalArray = arr.map((item) => {
+          //     if (item.id === id) {
+          //       item.componentValue = e.target.value;
+          //       item.isUploaded = false;
+          //       setLink(item.componentValue);
+          //       return item;
+          //     } else {
+          //       return item;
+          //     }
+          //   });
+          //   setArr(finalArray);
+          // }}
+          placeholder="https://example.example.com"
+        />
+      </Box>
+
+      <Box
+        className="save-button-container"
         sx={{
           display: "flex",
           flexDirection: "row",
@@ -223,6 +363,7 @@ const Imageformatting = () => {
           // border: "1px solid red",
         }}
       >
+        {/* This is cancel button code  */}
         {/* <button
           variant="outlined"
           style={{
@@ -238,7 +379,8 @@ const Imageformatting = () => {
         >
           Cancel
         </button> */}
-        {/* <button
+        <button
+          className="imageformatting-save-button"
           style={{
             backgroundColor: "#FFB81C",
             color: "black",
@@ -249,9 +391,10 @@ const Imageformatting = () => {
             fontSize: "14px",
             lineHeight: "32px",
           }}
+          onClick={saveChanges}
         >
           Save
-        </button> */}
+        </button>
       </Box>
     </Box>
   );

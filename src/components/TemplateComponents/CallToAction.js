@@ -13,7 +13,7 @@ const CallToAction = ({
   buttonUrl,
   buttonColor,
 }) => {
-  console.log("buttonColorValue in call to action", buttonColor);
+  // console.log("buttonColorValue in call to action", buttonColor);
   const [show, setShow] = useState(true);
   const {
     setEditorBtn,
@@ -33,27 +33,17 @@ const CallToAction = ({
     <div
       style={{
         position: "relative",
-        // width: show ? "calc(100% - 4px)" : "100%",
-        // backgroundColor: "#ffffff",
-        // border:"1px solid red"
-        // border: show && showVal && "2px solid #74D1EA",
       }}
       onDragOver={(e) => {
         e.preventDefault();
-        // console.log(indexVal);
       }}
       onDragEnter={() => {
-        // setIndVal(indexVal);
         setShow(true);
-        // console.log(indVal);
       }}
       onDragLeave={() => {
-        // setIndVal(-1);
         setShow(false);
-        // console.log(indVal);
       }}
       onDrop={() => {
-        // console.log("rop of Calltoaction");
         let temp = [...arr];
         temp.splice(indVal, 1);
         setArr(temp);
@@ -126,27 +116,17 @@ const CallToAction = ({
           <div
             draggable="true"
             onDragStart={() => {
-              // console.log("dragging start");
               setIndVal(indexVal);
               setSelectedComponent(item);
-              // console.log(selectedComponent);
             }}
             onDragEnd={() => {
               setIndVal(-1);
-              // console.log("dragging stop");
-              // let temp = [...arr];
-              // temp.splice(indexVal, 1);
-              // setArr(temp);
             }}
           >
             <RiDragMove2Line size="21px" />
           </div>
         </div>
       )}
-
-      {/* <button draggable style={stylebtn}>
-        {ctaName}
-      </button> */}
       <table
         align="center"
         width="600"
@@ -156,9 +136,9 @@ const CallToAction = ({
       >
         <td
           style={{
-            padding: show ? "18px" : "20px",
+            padding: (show && showVal) ? "18px" : "20px",
             border: show && showVal && "2px solid #74D1EA",
-            width: show ? "calc(100% - 4px)" : "100%",
+            width: (show && showVal) ? "calc(100% - 4px)" : "100%",
           }}
         >
           <table align="center" style={{ textDecoration: "none" }}>
@@ -181,9 +161,6 @@ const CallToAction = ({
                   target="_blank"
                   style={{
                     padding: "8px 12px",
-                    // border: "1px solid #002C3F",
-                    // borderRadius: "2px",
-                    // textDecoration: "none",
                     fontFamily: "Helvetica, Arial",
                     fontSize: "14px",
                     color: "#ffffff",

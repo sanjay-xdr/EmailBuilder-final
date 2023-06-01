@@ -11,8 +11,7 @@ import EmailHeader from "../emailLib/EmailHeader";
 // import Header from "./header";
 
 const Template = () => {
-  const { arr, setArr, onClickHandler, setEditorBtn, setFormatting } =
-    useContext(Contentcontext);
+  const { arr, setEditorBtn, setFormatting } = useContext(Contentcontext);
   useEffect(() => {
     localStorage.setItem("templateArray", JSON.stringify(arr));
   }, [arr]);
@@ -65,6 +64,7 @@ const Template = () => {
         alignItems: "center",
         flexDirection: "column",
         // border: "1px solid black",
+        zIndex: "100",
       }}
     >
       <div
@@ -72,7 +72,7 @@ const Template = () => {
         style={{
           textAlign: "center",
           // border: "1px solid black",
-          width:"100%",
+          width: "100%",
         }}
         id="finalTemplate"
       >
@@ -82,7 +82,7 @@ const Template = () => {
             width: "100%",
             //  maxwidth: "100%",
             height: "100%",
-             backgroundColor: "#F4F5F5",
+            backgroundColor: "#F4F5F5",
             // backgroundColor: "aqua",
             //  border:'1px solid green'
           }}
@@ -172,6 +172,8 @@ const Template = () => {
                       imgName={item.imgName}
                       key={index}
                       indexVal={index}
+                      imgBtnUrl={item.imgBtnUrl}
+                      disableUrl={item.disableUrl}
                     />
                   );
 

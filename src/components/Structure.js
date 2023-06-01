@@ -32,6 +32,8 @@ const Structure = () => {
             "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/images%2Fimage%20(3).pngemailBuilder?alt=media&token=fb0b5c37-1e2d-4e07-b000-23a6de980e6a",
           imgName: "Image",
           isUploaded:true,
+          imgBtnUrl:"https://www.youtube.com/",
+          disableUrl: true,
         },
       ]);
     } else {
