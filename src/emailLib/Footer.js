@@ -33,7 +33,7 @@ export default function Footer() {
                     style={{ display: "inline-block" }}
                   >
                     <img
-                      src="https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/linkedin.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/linkedin.png?alt=media&token=71005fbb-7517-4551-aa59-970ac3fd1213&_gl=1*de6xnv*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgyNDYuMC4wLjA."
                       alt="LinkedIn Icon"
                       style={{ width: "32px" }}
                     />
@@ -46,7 +46,7 @@ export default function Footer() {
                     style={{ display: "inline-block" }}
                   >
                     <img
-                      src="https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/youtube.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/youtube.png?alt=media&token=b36e3844-8bc6-4572-b616-603453826d5f&_gl=1*an5zw4*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgyNzkuMC4wLjA."
                       alt="Youtube Icon"
                       style={{ width: "32px" }}
                     />
@@ -59,7 +59,7 @@ export default function Footer() {
                     style={{ display: "inline-block" }}
                   >
                     <img
-                      src="https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/facebook.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/facebook.png?alt=media&token=54dc4f58-d85a-4bf7-8e55-70083a5d6d10&_gl=1*vl15w*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgzMDUuMC4wLjA."
                       alt="Facebook Icon"
                       style={{ width: "32px" }}
                     />
@@ -72,7 +72,7 @@ export default function Footer() {
                     style={{ display: "inline-block" }}
                   >
                     <img
-                      src="https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/instagram%20(1).png"
+                      src="https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/instagram%20(1).png?alt=media&token=f2bb865c-0fa7-4828-92ad-0d2773310bb0&_gl=1*1g3lkog*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgzMjguMC4wLjA."
                       alt="Facebook Icon"
                       style={{ width: "32px" }}
                     />
@@ -84,7 +84,7 @@ export default function Footer() {
                     rel="noreferrer"
                   >
                     <img
-                      src="https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/twitter.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/twitter.png?alt=media&token=aa72d3d3-f5fa-4d00-8577-85feb21fe1e5&_gl=1*6uo8up*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgzNDguMC4wLjA."
                       alt="Twitter Icon"
                       style={{ width: "32px" }}
                     />

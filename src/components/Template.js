@@ -11,8 +11,7 @@ import EmailHeader from "../emailLib/EmailHeader";
 // import Header from "./header";
 
 const Template = () => {
-  const { arr, setArr, onClickHandler, setEditorBtn, setFormatting } =
-    useContext(Contentcontext);
+  const { arr, setEditorBtn, setFormatting } = useContext(Contentcontext);
   useEffect(() => {
     localStorage.setItem("templateArray", JSON.stringify(arr));
   }, [arr]);
@@ -42,7 +41,7 @@ const Template = () => {
     width: 200,
     subtitleColor: "#002C3F",
 
-    src: "https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/CG-Logo_GoldNavy.png",
+    src: "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/CG-Logo_GoldNavy.png?alt=media&token=ad197cef-bf8c-41d3-84d9-3bcc2f4b2120&_gl=1*pvb0ik*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgwNzAuMC4wLjA.",
   });
 
   const [header2, setHeader2] = useState({
@@ -50,7 +49,7 @@ const Template = () => {
     bgColor: "#002C3F",
     width: 200,
     subtitleColor: "#ffffff",
-    src: "https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/CG-Logo_White.png",
+    src: "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/CG-Logo_White.png?alt=media&token=7ec56668-8b78-45fb-85d4-0296ff430049&_gl=1*1u1b9zb*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgxNDIuMC4wLjA.",
   });
 
   console.log(arr);
@@ -65,6 +64,7 @@ const Template = () => {
         alignItems: "center",
         flexDirection: "column",
         // border: "1px solid black",
+        zIndex: "100",
       }}
     >
       <div
@@ -72,7 +72,7 @@ const Template = () => {
         style={{
           textAlign: "center",
           // border: "1px solid black",
-          width:"100%",
+          width: "100%",
         }}
         id="finalTemplate"
       >
@@ -82,7 +82,7 @@ const Template = () => {
             width: "100%",
             //  maxwidth: "100%",
             height: "100%",
-             backgroundColor: "#F4F5F5",
+            backgroundColor: "#F4F5F5",
             // backgroundColor: "aqua",
             //  border:'1px solid green'
           }}
@@ -172,6 +172,8 @@ const Template = () => {
                       imgName={item.imgName}
                       key={index}
                       indexVal={index}
+                      imgBtnUrl={item.imgBtnUrl}
+                      disableUrl={item.disableUrl}
                     />
                   );
 
