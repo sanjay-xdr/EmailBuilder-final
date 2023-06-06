@@ -92,7 +92,7 @@ export function ActionBar() {
     // } catch {
     //   fileType = navigator.platform === "Windows" ? "eml" : "emltpl";
     // }
-    fileType = platform === "pc" ? "eml" : "emltpl";
+    fileType = platform === "Win" ? "eml" : "emltpl";
     console.log("Sendign email");
     console.log(document.querySelector("#finalTemplate").innerHTML);
     let emailData = document.querySelector("#finalTemplate").innerHTML;
@@ -220,19 +220,19 @@ export function ActionBar() {
           <button
             style={sendButtonStyle}
             onClick={() => {
-              sendEmail("pc");
+              sendEmail("Win");
             }}
           >
             <div style={buttonText}>
               <span>Download</span>
-              <span style={buttonSpan}>For PC</span>
+              <span style={buttonSpan}>For Win</span>
             </div>
             <BsWindows size="20px" style={{ marginLeft: "19px" }} />
           </button>
           <button
             style={sendButtonStyle}
             onClick={() => {
-              sendEmail("mac");
+              sendEmail("Mac");
             }}
           >
             <div style={buttonText}>
