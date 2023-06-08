@@ -166,10 +166,10 @@ const Content = ({ indexVal, userValue, id, item }) => {
           <td
             align="center"
             style={{
-              paddingTop: show ? "22px" : "24px",
-              paddingBottom: show ? "22px" : "24px",
-              paddingLeft: show ? "22px" : "24px",
-              paddingRight: show ? "22px" : "24px",
+              paddingTop: (show && showVal) ? "22px" : "24px",
+              paddingBottom: (show && showVal) ? "22px" : "24px",
+              paddingLeft: (show && showVal) ? "22px" : "24px",
+              paddingRight: (show && showVal) ? "22px" : "24px",
             }}
           >
             <div
