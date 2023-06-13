@@ -2,7 +2,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Templatepage from "./pages/Templatepage";
+import Templatepage from "./pages/templatepage/Templatepage";
 import Header from "./components/header";
 // import Login from "./pages/Login";
 // import SignUp from "./pages/SignUp";
