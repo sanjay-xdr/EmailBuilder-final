@@ -16,12 +16,14 @@ const Structure = () => {
 
   const onClickHandler = (e) => {
     const val = e.currentTarget.innerText;
-    console.log(val.length, " I am the value")
-    let finalvalue = val.trim()
-    console.log(finalvalue.length, "This is the final value")
+    console.log(val.length, " I am the value");
+    let finalvalue = val.trim();
+    console.log(finalvalue.length, "This is the final value");
     if (finalvalue === "Content") {
-      setArr([...arr, { id: v4(), component: finalvalue, componentValue: data }]);
-
+      setArr([
+        ...arr,
+        { id: v4(), component: finalvalue, componentValue: data },
+      ]);
     } else if (finalvalue === "Image") {
       setArr([
         ...arr,
@@ -29,9 +31,11 @@ const Structure = () => {
           id: v4(),
           component: finalvalue,
           componentValue:
-            "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/images%2Fimage%20(3).pngemailBuilder?alt=media&token=fb0b5c37-1e2d-4e07-b000-23a6de980e6a",
+            "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/image%20(4).png?alt=media&token=e6b77f62-2f1e-409d-bf28-d2d9b82e4886&_gl=1*12mta0i*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODg2MDkuMC4wLjA.",
           imgName: "Image",
-          isUploaded:true,
+          isUploaded: true,
+          imgBtnUrl: "",
+          disableUrl: true,
         },
       ]);
     } else {
@@ -42,7 +46,7 @@ const Structure = () => {
           component: finalvalue,
           buttonText: "Hey There",
           buttonUrl: "https://cginfinity.com/",
-          buttonColor:"#002C3F"
+          buttonColor: "#002C3F",
         },
       ]);
     }

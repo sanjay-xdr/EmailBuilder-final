@@ -45,7 +45,7 @@ const Selecttheme = () => {
               emailTemplateDispatcher({
                 type: "CHANGE_HEADER_WHITE",
                 payload: {
-                  darkMode: "false",
+                  darkMode: "light",
                   libtype: "Image",
                   values: {
                     alignment: "center",
@@ -76,7 +76,7 @@ const Selecttheme = () => {
               emailTemplateDispatcher({
                 type: "CHANGE_HEADER_DARK",
                 payload: {
-                  darkMode: "false",
+                  darkMode: "dark",
                   libtype: "Image",
                   values: {
                     alignment: "center",
@@ -105,6 +105,42 @@ const Selecttheme = () => {
               <Typography variant="text">Dark Mode</Typography>
             </Stack>
           </Button>
+          {/* this is the code for  */}
+          {/* <Button
+            sx={{ color: "black" }}
+            onClick={() =>
+              emailTemplateDispatcher({
+                type: "CHANGE_HEADER_BLACK",
+                payload: {
+                  darkMode: "black",
+                  libtype: "Image",
+                  values: {
+                    alignment: "center",
+                    bgColor: "#000000",
+                    width: 200,
+                    src: "https://cginfinity.com/wp-content/uploads/2022/04/cgi-logo.svg",
+                  },
+                },
+              })
+            }
+          >
+            <Stack sx={{ padding: "16px" }}>
+              <Box
+                sx={{ backgroundColor: "#002C3F" }}
+                width="156px"
+                height="46.33px"
+              >
+                <img
+                  style={{ marginTop: "16px" }}
+                  width="62.29px"
+                  height="14.33px"
+                  src={logoLight}
+                  alt="Black Mode"
+                />
+              </Box>
+              <Typography variant="text">Black Mode</Typography>
+            </Stack>
+          </Button> */}
         </Stack>
       </Box>
       <Typography sx={typeStyle} variant="h6">
@@ -136,8 +172,6 @@ const Selecttheme = () => {
           </Stack>
         </button>
       </Stack>
-
-    
     </Box>
   );
 };

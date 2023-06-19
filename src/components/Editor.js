@@ -9,6 +9,7 @@ import {
   Imageformatting,
   Selecttheme,
 } from "./FormattingComponent";
+import Footerformatting from "./FormattingComponent/Footerformatting";
 
 const Editor = () => {
   const { editorBtn, setEditorBtn, formatting } = useContext(Contentcontext);
@@ -104,6 +105,7 @@ const Editor = () => {
         {editorBtn === "f" && formatting === "bgcolor" && <BgColor />}
         {editorBtn === "f" && formatting === "linkbutton" && <Linkbutton />}
         {editorBtn === "f" && formatting === "selecttheme" && <Selecttheme />}
+        {editorBtn === "f" && formatting === "footerformatting" && <Footerformatting />}
     </Box>
   );
 };

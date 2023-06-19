@@ -11,49 +11,40 @@ import EmailHeader from "../emailLib/EmailHeader";
 // import Header from "./header";
 
 const Template = () => {
-  const { arr, setArr, onClickHandler, setEditorBtn, setFormatting } =
-    useContext(Contentcontext);
+  const { arr, setEditorBtn, setFormatting } = useContext(Contentcontext);
   useEffect(() => {
     localStorage.setItem("templateArray", JSON.stringify(arr));
   }, [arr]);
 
   const bgc = "#ffffff";
-  // let ind = -1;
-  // const onDragEnter = (e) => {
-  //   if (e.target.className === "template-class") {
-  //     console.log("working");
-  //   }
-  // };
-  // const onDragOver = (e) => {
-  //   e.preventDefault();
-  // };
-  // const onDrop = (e) => {
-  //   e.preventDefault();
-  //   console.log("this is also working");
-  // };
 
   const { emailTemplate } = useEmailTemplate();
   const { alignment, setAlignment } = useContext(Contentcontext);
-  console.log(emailTemplate.darkMode, " I am the state");
+  // console.log(emailTemplate.darkMode, " I am the state");
 
-  const [header, setHeader] = useState({
-    alignment: "center",
+  const [headerLight, setHeaderLight] = useState({
+    // alignment: "center",
     bgColor: "#FFFFFF",
     width: 200,
     subtitleColor: "#002C3F",
-
-    src: "https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/CG-Logo_GoldNavy.png",
+    src: "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/CG-Logo_GoldNavy.png?alt=media&token=ad197cef-bf8c-41d3-84d9-3bcc2f4b2120&_gl=1*pvb0ik*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgwNzAuMC4wLjA.",
   });
 
-  const [header2, setHeader2] = useState({
-    alignment: "center",
+  const [headerDark, setHeaderDark] = useState({
+    // alignment: "center",
     bgColor: "#002C3F",
     width: 200,
     subtitleColor: "#ffffff",
-    src: "https://udqpsjhnskuytmiteqwd.supabase.co/storage/v1/object/public/Demo/CG-Logo_White.png",
+    src: "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/CG-Logo_White.png?alt=media&token=7ec56668-8b78-45fb-85d4-0296ff430049&_gl=1*1u1b9zb*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgxNDIuMC4wLjA.",
   });
 
-  console.log(arr);
+  const [headerBlack, setHeaderBlack] = useState({
+    // alignment: "center",
+    bgColor: "#000000",
+    width: 200,
+    subtitleColor: "#ffffff",
+    src: "https://firebasestorage.googleapis.com/v0/b/email-builder-demo-1e3fd.appspot.com/o/CG-Logo_White.png?alt=media&token=7ec56668-8b78-45fb-85d4-0296ff430049&_gl=1*1u1b9zb*_ga*NDA1ODcxNS4xNjc2OTYwNzgw*_ga_CW55HF8NVT*MTY4NTY4NjkxOC4yMC4xLjE2ODU2ODgxNDIuMC4wLjA.",
+  });
 
   return (
     <div
@@ -65,14 +56,16 @@ const Template = () => {
         alignItems: "center",
         flexDirection: "column",
         // border: "1px solid black",
+        zIndex: "100",
       }}
     >
+      {console.log("this is the value of alignment after changing ", alignment)}
       <div
         className="templateInnerLayer"
         style={{
           textAlign: "center",
           // border: "1px solid black",
-          width:"100%",
+          width: "100%",
         }}
         id="finalTemplate"
       >
@@ -82,7 +75,7 @@ const Template = () => {
             width: "100%",
             //  maxwidth: "100%",
             height: "100%",
-             backgroundColor: "#F4F5F5",
+            backgroundColor: "#F4F5F5",
             // backgroundColor: "aqua",
             //  border:'1px solid green'
           }}
@@ -119,28 +112,34 @@ const Template = () => {
                       paddingLeft: 0,
                       paddingRight: 0,
                       boxSizing: "border-box",
-                      // paddingTop: "15px",
-                      // paddingBottom: "15px",
-                      // border: "1px solid blue",
                     }}
                   >
-                    {alignment === "center" ? (
-                      emailTemplate.darkMode ? (
-                        <ImageContent {...header2} />
-                      ) : (
-                        <ImageContent {...header} />
-                      )
-                    ) : emailTemplate.darkMode ? (
-                      <EmailHeader {...header2} />
-                    ) : (
-                      <EmailHeader {...header} />
-                    )}
+                    {alignment === "center" &&
+                      emailTemplate.darkMode === "light" && (
+                        <ImageContent {...headerLight} />
+                      )}
+                    {alignment === "center" &&
+                      emailTemplate.darkMode === "dark" && (
+                        <ImageContent {...headerDark} />
+                      )}
+                    {alignment === "center" &&
+                      emailTemplate.darkMode === "black" && (
+                        <ImageContent {...headerBlack} />
+                      )}
+                    {alignment === "left" &&
+                      emailTemplate.darkMode === "light" && (
+                        <EmailHeader {...headerLight} />
+                      )}
+                    {alignment === "left" &&
+                      emailTemplate.darkMode === "dark" && (
+                        <EmailHeader {...headerDark} />
+                      )}
+                    {alignment === "left" &&
+                      emailTemplate.darkMode === "black" && (
+                        <EmailHeader {...headerBlack} />
+                      )}
 
-                    {/* {alignment==="left" && emailTemplate.darkMode ? (
-                    <Header />
-                  ) : (
-                    <ImageContent {...header} />
-                  )} */}
+                    {/* {alignment === "center" && emailTemplate.darkMode == "dark" && (<)} */}
                   </td>
                 </tr>
               </tbody>
@@ -172,6 +171,8 @@ const Template = () => {
                       imgName={item.imgName}
                       key={index}
                       indexVal={index}
+                      imgBtnUrl={item.imgBtnUrl}
+                      disableUrl={item.disableUrl}
                     />
                   );
 
