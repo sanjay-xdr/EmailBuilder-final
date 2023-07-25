@@ -1,31 +1,106 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { MdModeEditOutline } from "react-icons/md";
+import { Contentcontext } from "../context/Context";
 
 export default function Footer() {
+  const [display, setDisplay] = useState(false);
+  const { setEditorBtn, setFormatting, footerTheme, preview } =
+    useContext(Contentcontext);
   return (
-    <div>
-
-
+    <div
+      style={{
+        // border: "solid green",
+        position: "relative",
+      }}
+      onMouseEnter={() => {
+        setDisplay(true);
+      }}
+      onMouseLeave={() => {
+        setDisplay(false);
+      }}
+    >
+      {!preview && display && (
+        <div
+          style={{
+            border: "2px solid rgba(0,0,0,0)",
+            position: "absolute",
+            width: "596px",
+            height: "144px",
+            left: "66px",
+            margin: "auto",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <div
+            style={{
+              color: "#ffffff",
+              backgroundColor: "#74D1EA",
+              width: "fit-content",
+              fontSize: "14px",
+              lineHeight: "16px",
+              padding: "4px",
+              fontWeight: "500",
+              height: "fit-content",
+            }}
+          >
+            Footer
+          </div>
+          {/* <div> */}
+          <div
+            style={{
+              color: "#ffffff",
+              padding: "4px 4px",
+              width: "fit-content",
+              height: "fit-content",
+              backgroundColor: "#343435",
+              cursor: "pointer",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setEditorBtn("f");
+              setFormatting("footerformatting");
+            }}
+          >
+            <MdModeEditOutline size="20px" />
+          </div>
+          {/* </div> */}
+        </div>
+      )}
       <table
         align="center"
         style={{
           textAlign: "center",
           minWidth: "600px",
-          backgroundColor: "#1E1E1E",
-          verticalAlign:"top"
-     
+          backgroundColor: footerTheme ? "#1E1E1E" : "#ffffff",
+          verticalAlign: "top",
+          boxSizing: "border-box",
+          border: display && !preview ? "2px solid #74D1EA" : "",
         }}
         width="600"
       >
         <tbody>
           <tr>
-            <td width="600" align="center" style={{width:"600px",verticalAlign:"top"}}>
+            <td
+              width="600"
+              align="center"
+              style={{
+                width: display && !preview ? "596px" : "600px",
+                verticalAlign: "top",
+              }}
+            >
               <div
                 style={{
                   color: "#ffffff",
                   alignContent: "center",
                 }}
               >
-                <div style={{ marginTop: "20px", marginBottom: "16px" }}>
+                <div
+                  style={{
+                    marginTop: display && !preview ? "18px" : "20px",
+                    marginBottom: display && !preview ? "14px" : "16px",
+                  }}
+                >
                   <a
                     href="https://www.linkedin.com/company/cginfinity"
                     target="_blank"
@@ -91,33 +166,38 @@ export default function Footer() {
                   </a>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
-                <div>
+                <div style={{ border: "1px solid rgba(0,0,0,0)" }}>
                   <a
                     href="https://cginfinity.com/"
                     style={{
                       textDecoration: "none",
                       fontSize: "16px",
-                      marginTop: 0,
+                      marginTop: display && !preview ? "2px" : 0,
                       display: "block",
-                      color: "#ffffff",
+                      color: footerTheme ? "#ffffff" : "#1E1E1E",
                       fontWeight: 400,
                       marginBottom: "8px",
                       letterSpacing: 0.5,
+                      width: "fit-content",
                     }}
                   >
                     www.cginfinity.com
                   </a>
                 </div>
-                <div style={{ marginBottom: "20px" }}>
+                <div
+                  style={{
+                    marginBottom: display && !preview ? "18px" : "20px",
+                  }}
+                >
                   <span
                     style={{
-                      marginTop: 0,
-                      marginBottom: 0,
+                      // marginTop: 0,
+                      // marginBottom: 0,
                       fontFamily: "Helvetica, Arial, sans-serif",
                       fontWeight: 400,
                       fontSize: "14px",
                       textDecoration: "none",
-                      color: "#ffffff",
+                      color: footerTheme ? "#ffffff" : "#1E1E1E",
                       letterSpacing: 1,
                     }}
                   >
@@ -129,8 +209,6 @@ export default function Footer() {
           </tr>
         </tbody>
       </table>
-
-     
     </div>
   );
 }

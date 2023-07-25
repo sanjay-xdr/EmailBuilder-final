@@ -5,6 +5,7 @@ import ImageIcon from "../../Images/ImageIcon.svg";
 import { AiFillDelete } from "react-icons/ai";
 import { RiDragMove2Line } from "react-icons/ri";
 import { MdModeEditOutline } from "react-icons/md";
+// import "./Images.css";
 
 const Images = ({
   indexVal,
@@ -144,6 +145,7 @@ const Images = ({
           >
             <AiFillDelete size="20px" />
           </div>
+
           <div
             onClick={(e) => {
               e.stopPropagation();
@@ -172,12 +174,13 @@ const Images = ({
         className="image-wrapper-table"
         style={{
           width: "600px",
+          // border: "1px solid blue",
           backgroundColor: "#FFFFFF",
           textAlign: "center",
           lineHeight: 0,
           fontSize: 0,
         }}
-        width="600px"
+        width="600"
         cellPadding="0"
         cellSpacing="0"
         align="center"
@@ -185,8 +188,8 @@ const Images = ({
         <tr
           style={{
             width: "600px",
-            // padding: 0,
-            // margin: 0,
+            padding: 0,
+            margin: 0,
             // border: "1px solid black",
           }}
         >
@@ -194,24 +197,23 @@ const Images = ({
             style={{
               width: "600px",
               // border: "1px solid red",
-              // padding: 0,
-              // margin: 0,
+              padding: 0,
+              margin: 0,
             }}
             width="600"
             align="center"
           >
             {disableUrl ? (
               <img
+                className="template-image"
                 width={imgWidth > 600 ? "600" : "auto"}
                 align="center"
                 style={{
                   maxWidth: "600px",
-                  display: "flex",
-                  // verticalAlign: "middle",
-                  // border:'1px solid black'
+                  display: "block",
+                  margin: 0,
+                  padding: 0,
                 }}
-                // border="1px solid red"
-                verticalAlign="middle"
                 src={imgsrc || ImageIcon}
                 alt=" icon"
               />
@@ -219,19 +221,30 @@ const Images = ({
               <a
                 href={imgBtnUrl}
                 // href="https://www.youtube.com/"
-                //  style={{ border: "1px solid red" }}
+                style={{
+                  display: "flex",
+                  width: "600px",
+                  maxWidth: "600px",
+                  lineHeight: 0,
+                  fontSize: 0,
+                  verticalAlign: "middle",
+                  boxSizing: "border-box",
+                  textAlign: "center",
+                  justifyContent: "center",
+                }}
+                width="600"
+                align="center"
               >
                 <img
+                  className="template-image"
                   width={imgWidth > 600 ? "600" : "auto"}
                   align="center"
                   style={{
                     maxWidth: "600px",
-                    display: "flex",
-                    // verticalAlign: "middle",
-                    // border:'1px solid black'
+                    display: "block",
+                    margin: 0,
+                    padding: 0,
                   }}
-                  // border="1px solid red"
-                  verticalAlign="middle"
                   src={imgsrc || ImageIcon}
                   alt=" icon"
                 />

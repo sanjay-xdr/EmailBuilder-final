@@ -92,7 +92,7 @@ export function ActionBar() {
     // } catch {
     //   fileType = navigator.platform === "Windows" ? "eml" : "emltpl";
     // }
-    fileType = platform === "pc" ? "eml" : "emltpl";
+    fileType = platform === "Win" ? "eml" : "emltpl";
     console.log("Sendign email");
     console.log(document.querySelector("#finalTemplate").innerHTML);
     let emailData = document.querySelector("#finalTemplate").innerHTML;
@@ -136,7 +136,7 @@ export function ActionBar() {
     a.href = textFile;
 
     a.id = "fileLink";
-    a.download = emailsubject + `.${fileType}`; //'filenameTest.eml' ;
+    a.download = emailsubject + ` (${platform})` + `.${fileType}`; //'filenameTest.eml' ;
     a.style.visibility = "hidden";
 
     document.body.appendChild(a);
@@ -168,7 +168,7 @@ export function ActionBar() {
           <span
             style={{ fontSize: "14px", fontWeight: "400", color: "#B2B2B3" }}
           >
-            File Name:
+            File Name <span style={{color:"red"}}> * </span>: 
           </span>
           {/* <span style={{ fontSize: "18px", fontWeight: "500" }}>
           Win Announcement
@@ -220,19 +220,19 @@ export function ActionBar() {
           <button
             style={sendButtonStyle}
             onClick={() => {
-              sendEmail("pc");
+              sendEmail("Win");
             }}
           >
             <div style={buttonText}>
               <span>Download</span>
-              <span style={buttonSpan}>For PC</span>
+              <span style={buttonSpan}>For Win</span>
             </div>
             <BsWindows size="20px" style={{ marginLeft: "19px" }} />
           </button>
           <button
             style={sendButtonStyle}
             onClick={() => {
-              sendEmail("mac");
+              sendEmail("Mac");
             }}
           >
             <div style={buttonText}>

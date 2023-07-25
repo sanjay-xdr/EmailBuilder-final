@@ -30,17 +30,20 @@ function App() {
 
   return (
     <>
-      <div style={{ position: "sticky", top: "0" }}>
+      <div
+        style={{
+          position: "sticky",
+          top: "0",
+        }}
+      >
         <Header />
       </div>
       <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+
         <Route path="/" element={<Templatepage />} />
         <Route path="/template" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/verification" element={<Verification />} />
-      <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/newpassword" element={<CreateNewPassword />} /> */}
+        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </>
   );

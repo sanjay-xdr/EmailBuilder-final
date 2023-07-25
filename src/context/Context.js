@@ -21,8 +21,10 @@ const Context = ({ children }) => {
   const [selectedComponent, setSelectedComponent] = useState("");
   const [showVal, setShowVal] = useState(true);
   const [confirmation, setConfirmation] = useState(false);
-  const [alignment, setAlignment] = useState("left")
-  // const [btnColor, setBtnColor] = useState('#002C3F');
+  const [alignment, setAlignment] = useState("left"); // header alignment
+  const [footerTheme, setFooterTheme] = useState(true); // footer theme
+  const [arr1, setarr1] = useState([]);
+  const [preview, setPreview] = useState(false); // to show the preview
 
   return (
     <Contentcontext.Provider
@@ -49,6 +51,12 @@ const Context = ({ children }) => {
         setConfirmation,
         alignment,
         setAlignment,
+        footerTheme,
+        setFooterTheme,
+        arr1,
+        setarr1,
+        preview,
+        setPreview,
       }}
     >
       {children}
@@ -57,5 +65,3 @@ const Context = ({ children }) => {
 };
 
 export default Context;
-
-

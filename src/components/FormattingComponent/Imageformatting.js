@@ -11,6 +11,7 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { v4 as uuidv4 } from "uuid";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import{ v4 as uuid} from 'uuid';
 
 const Imageformatting = () => {
   const [link, setLink] = useState("");
@@ -130,6 +131,22 @@ const Imageformatting = () => {
   //     console.log("Error");
   //   }
   // }
+
+
+
+  function getCurrentDateAndTime() {
+    const currentDateAndTime = new Date();
+  
+    const day = String(currentDateAndTime.getDate()).padStart(2, '0');
+    const month = String(currentDateAndTime.getMonth() + 1).padStart(2, '0');
+    const year = currentDateAndTime.getFullYear();
+  
+    const hours = String(currentDateAndTime.getHours()).padStart(2, '0');
+    const minutes = String(currentDateAndTime.getMinutes()).padStart(2, '0');
+    const seconds = String(currentDateAndTime.getSeconds()).padStart(2, '0');
+  
+    return `${day}-${month}-${year}_${hours}-${minutes}-${seconds}`;
+  }
   const upoloadImage = (data) => {
     console.log("Uploading Image......");
     console.log(data);
@@ -138,7 +155,7 @@ const Imageformatting = () => {
       return;
     }
 
-    const imageRef = ref(storage, `${data.target.files[0].name}`);
+    const imageRef = ref(storage, `${data.target.files[0].name.split('.')[0]}-${uuid()}-${getCurrentDateAndTime()}-${data.target.files[0].name.split('.')[1]}`);
     console.log("Trying to upload it");
     uploadBytes(imageRef, data.target.files[0]).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {

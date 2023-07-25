@@ -7,15 +7,14 @@ export default function ImageContent(props) {
       style={{
         width: "600px",
         height: "20px",
-        textAlign: props.alignment,
+        textAlign: "center",
         paddingTop: "5px",
         paddingBottom: "5px",
         backgroundColor: props.bgColor,
-
       }}
     >
       <tr style={{ width: "600px" }}>
-        <td align={props.alignment} style={{ width: "600px" }} width="600">
+        <td align={"center"} style={{ width: "600px" }} width="600">
           <img
             width={props.width}
             style={{
@@ -50,10 +49,6 @@ export default function ImageContent(props) {
             to Transform{" "}
           </p>
         </td>
-
-       
-
-     
       </tr>
     </table>
   );
