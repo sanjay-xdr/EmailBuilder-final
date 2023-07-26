@@ -24,29 +24,39 @@ import Icon2 from "../Images/Icon-1.svg";
 import Icon3 from "../Images/Icon-1.svg";
 import frame from "../Images/frame.svg";
 import "./Templatepage.css";
+import { useEmailTemplate } from "../context/email-template";
 
 export default function Templatepage() {
   const navigate = useNavigate();
+  const { emailTemplateDispatcher } = useEmailTemplate();
 
   const [value, setvalue] = useState(false);
 
   const [indexVal, setIndexVal] = useState(-1);
 
-  const { setArr, setarr1, setShowVal, preview, setPreview, setEditorBtn } =
-    useContext(Contentcontext);
+  const {
+    setArr,
+    setarr1,
+    setShowVal,
+    preview,
+    setPreview,
+    setEditorBtn,
+    setFooterTheme,
+    setAlignment,
+  } = useContext(Contentcontext);
 
   const [state, setstate] = useState(false);
 
   const [previewIndex, setPreviewIndex] = useState();
 
-  const data = JSON.parse( localStorage.getItem("templateArray"))
+  const data = JSON.parse(localStorage.getItem("templateArray"));
 
   useEffect(() => {
     setEditorBtn("s");
   }, []);
 
   const editClickHandler = (index) => {
-    if (data && data.length!==0) {
+    if (data && data.length !== 0) {
       // console.log(
       //   "this is the console value",
       //   localStorage.getItem("templateArray")
@@ -62,7 +72,7 @@ export default function Templatepage() {
   };
 
   const handleClick = () => {
-    if (data && data.length!==0) {
+    if (data && data.length !== 0) {
       setArr([]);
       setstate(true);
     } else {
@@ -78,6 +88,45 @@ export default function Templatepage() {
     setarr1([]);
 
     setarr1(pre_template[index]);
+  };
+  const handleFileChange = (e) => {
+    let file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const content = reader.result;
+        const commentRegex = /<!--(.*?)-->/gs;
+        const match = commentRegex.exec(content);
+
+        if (match) {
+          const seperatedArray = match[1].split("seperate");
+          setFooterTheme(() => (seperatedArray[2] === "true" ? true : false));
+          const headerArray = seperatedArray[0].split("+");
+          setAlignment(headerArray[1]);
+          emailTemplateDispatcher({
+            type:
+              headerArray[0] === "dark"
+                ? "CHANGE_HEADER_DARK"
+                : "CHANGE_HEADER_WHITE",
+            payload: {
+              darkMode: headerArray[0],
+              libtype: "Image",
+              values: {
+                alignment: "center",
+                bgColor: "#FFFFFF",
+                width: 200,
+                src: "https://cginfinity.com/wp-content/uploads/2022/04/logo-footer.svg",
+              },
+            },
+          });
+          const parsedData = JSON.parse(seperatedArray[1]);
+          setArr(parsedData);
+        }
+      };
+      reader.readAsText(file);
+    }
+    file = {};
+    navigate("/template");
   };
 
   const arr = [
@@ -303,26 +352,18 @@ export default function Templatepage() {
                   variant="outlined"
                   style={{
                     color: "black",
-
                     fontWeight: "bold",
                     cursor: "pointer",
-
                     padding: "4px 16px",
-
                     background: "none",
-
                     border: "1px solid black",
-
                     borderRadius: "4px",
-
                     fontSize: "14px",
-
                     lineHeight: "32px",
-
                     width: "11.5rem",
                   }}
                   onClick={() => {
-                   setArr(data)
+                    setArr(data);
                     setstate(false);
                   }}
                 >
@@ -331,26 +372,16 @@ export default function Templatepage() {
                 <button
                   style={{
                     padding: "4px 16px",
-
                     alignItems: "center",
                     cursor: "pointer",
-
                     boxShadow: "0px 2px 10px rgba(34, 62, 73, 0.1)",
-
                     borderRadius: "4px",
-
                     fontSize: "14px",
-
                     lineHeight: "32px",
-
                     fontWeight: "600",
-
                     border: "none",
-
                     backgroundColor: "#FFB81C",
-
                     width: "11.5rem",
-
                     color: "#000000",
                   }}
                   onClick={() => {
@@ -595,30 +626,44 @@ export default function Templatepage() {
               <label className="templatepage-label" htmlFor="select-file">
                 Choose File
               </label>
-              <input type="file" id="select-file" style={{ display: "none" }} />
+              <input
+                type="file"
+                accept=".eml, .emltpl"
+                id="select-file"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+                value=""
+              />
               {/* <button className="templatepage-button"> Choose File</button> */}
             </div>
           </div>
 
-   {data && data.length!=0 ?        <div className="templatePage-Card">
-            <div className="image-container">
-              <img src={Icon3} alt="icon" className="templatepage-icon" />
-              <img src={frame} alt="frame" style={{ visibility: "hidden" }} />
-            </div>
+          {data && data.length != 0 ? (
+            <div className="templatePage-Card">
+              <div className="image-container">
+                <img src={Icon3} alt="icon" className="templatepage-icon" />
+                <img src={frame} alt="frame" style={{ visibility: "hidden" }} />
+              </div>
 
-            <div className="text-container">
-              <h2>Continue Where you left</h2>
-              <p>
-                You can resume your editing from where you left off. &nbsp;
-                &nbsp; &nbsp; &nbsp;
-              </p>
+              <div className="text-container">
+                <h2>Continue Where you left</h2>
+                <p>
+                  You can resume your editing from where you left off. &nbsp;
+                  &nbsp; &nbsp; &nbsp;
+                </p>
 
-              <Link style={{ marginTop: "20px", display: "block" }} to="/template">
-                {" "}
-                <button className="templatepage-button"> Continue </button>
-              </Link>
+                <Link
+                  style={{ marginTop: "20px", display: "block" }}
+                  to="/template"
+                >
+                  {" "}
+                  <button className="templatepage-button"> Continue </button>
+                </Link>
+              </div>
             </div>
-          </div> : ""}
+          ) : (
+            ""
+          )}
         </div>
       </div>
 

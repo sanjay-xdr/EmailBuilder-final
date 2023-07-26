@@ -74,7 +74,9 @@ const buttonSpan = {
 export function ActionBar() {
   // const filename = useRef("Untitled");
   const [filename, setFileName] = useState("Untitled");
-  const { setShowVal, arr, setConfirmation } = useContext(Contentcontext);
+  const { emailTemplate } = useEmailTemplate();
+  const { setShowVal, arr, setConfirmation, footerTheme, alignment } =
+    useContext(Contentcontext);
   // function onChangeHandler(e) {
   //   setFileName(e.target.value);
   // };
@@ -93,8 +95,8 @@ export function ActionBar() {
     //   fileType = navigator.platform === "Windows" ? "eml" : "emltpl";
     // }
     fileType = platform === "Win" ? "eml" : "emltpl";
-    console.log("Sendign email");
-    console.log(document.querySelector("#finalTemplate").innerHTML);
+    // console.log("Sendign email");
+    // console.log(document.querySelector("#finalTemplate").innerHTML);
     let emailData = document.querySelector("#finalTemplate").innerHTML;
     // console.log(emailData);
     // setShowVal(false);
@@ -102,7 +104,6 @@ export function ActionBar() {
     let emailto = null;
     let emailsubject = null;
     let emlCont = null;
-    console.log(mailHtm);
     mailHtm = `${emailData}`;
 
     emailto = "";
@@ -117,11 +118,14 @@ export function ActionBar() {
     emlCont += "" + "\n";
 
     emlCont += mailHtm;
-    console.log(emlCont, "i am the emCont");
+    emlCont += "" + "\n";
+    const jsonContent = JSON.stringify(arr, null, 2);
+    emlCont += `<!--${emailTemplate.darkMode}+${alignment}seperate${jsonContent}seperate${footerTheme}-->`;
+    // console.log(emlCont, "i am the emCont");
     let textFile = null;
     let EMLFileData_12 = null;
     EMLFileData_12 = new Blob([emlCont], { type: "text/plain" });
-    console.log(EMLFileData_12, "I am the data");
+    // console.log(EMLFileData_12, "I am the data");
     if (textFile !== null) {
       window.URL.createObjectURL(textFile);
     }
@@ -168,7 +172,7 @@ export function ActionBar() {
           <span
             style={{ fontSize: "14px", fontWeight: "400", color: "#B2B2B3" }}
           >
-            File Name <span style={{color:"red"}}> * </span>: 
+            File Name <span style={{ color: "red" }}> * </span>:
           </span>
           {/* <span style={{ fontSize: "18px", fontWeight: "500" }}>
           Win Announcement

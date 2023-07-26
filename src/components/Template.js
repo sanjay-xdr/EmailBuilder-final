@@ -19,7 +19,7 @@ const Template = () => {
   const bgc = "#ffffff";
 
   const { emailTemplate } = useEmailTemplate();
-  const { alignment, setAlignment } = useContext(Contentcontext);
+  const { alignment } = useContext(Contentcontext);
   // console.log(emailTemplate.darkMode, " I am the state");
 
   const [headerLight, setHeaderLight] = useState({
@@ -59,7 +59,6 @@ const Template = () => {
         zIndex: "100",
       }}
     >
-      {console.log("this is the value of alignment after changing ", alignment)}
       <div
         className="templateInnerLayer"
         style={{

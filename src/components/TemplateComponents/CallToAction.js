@@ -27,7 +27,6 @@ const CallToAction = ({
     setSelectedComponent,
     showVal,
   } = useContext(Contentcontext);
-  console.log(showVal, "SHOw Values");
 
   return (
     <div
