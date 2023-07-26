@@ -14,11 +14,11 @@ export default function EmailHeader(props) {
   return (
     <>
       <table
-        height="20"
+        height="74"
         style={{
           width: "600px",
 
-          height: "20px",
+          height: "74px",
           textAlign: "left",
           paddingTop: "5px",
           paddingBottom: "5px",

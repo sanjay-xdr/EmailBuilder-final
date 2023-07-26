@@ -8,20 +8,15 @@ const Linkbutton = () => {
 
 
   const [url, setUrl] = useState("");
-  const [fontFamily, setFontFamily] = useState("Roboto");
+  // const [fontFamily, setFontFamily] = useState("Roboto");
   const [buttonValue, setButtonValue] = useState("");
   const [btnColor, setBtnColor] = useState("")
   const changeHandler = (e) => {
     setButtonValue(e.target.value);
-
   };
   const urlhandler = (e) => {
     setUrl(e.target.value);
   };
-  const handleChange = (event) => {
-    setFontFamily(event.target.value);
-  };
-
   const { setArr, id, arr, } = useContext(Contentcontext);
 
   useEffect(() => {
@@ -36,13 +31,11 @@ const Linkbutton = () => {
         return item
       }
     })
-    
-    
   }, [id])
   
   
   const saveChanges = () => {
-    console.log("btnColor value", btnColor);
+    // console.log("btnColor value", btnColor);
     let finalArray = arr.map(item => {
       console.log(item);
       if (item.id === id) {
@@ -57,7 +50,7 @@ const Linkbutton = () => {
     })
 
 
-    console.log(finalArray, "Final Array");
+    // console.log(finalArray, "Final Array");
 
     setArr(finalArray);
   }
@@ -65,31 +58,6 @@ const Linkbutton = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
-
-      {/* code for canging the font style of the text in the button */}
-
-      {/* <Stack ml="8px" mb="32px" direction="row" alignItems="center">
-        <Typography ml="24px" mr="16px" variant="body1">
-          Font Family:
-        </Typography>
-        <Select
-          value={fontFamily}
-          onChange={handleChange}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{
-            width: "142px",
-            height: "34px",
-          }}
-        >
-          <MenuItem value={fontFamily}>Roboto</MenuItem>
-          <MenuItem value={fontFamily}>Georgia, serif</MenuItem>
-          <MenuItem value={fontFamily}>sans-serif</MenuItem>
-          <MenuItem value={fontFamily}>cursive</MenuItem>
-        </Select>
-      </Stack> */}
-
-      {/* code for changing the background color of the button */}
       <Stack 
         style={{
           marginBottom: "29px"
@@ -199,23 +167,7 @@ const Linkbutton = () => {
           // border: "1px solid red",
         }}
       >
-        {/* <button
-          variant="outlined"
-          style={{
-            color: "black",
-            fontWeight: "bold",
-            padding: "4px 16px",
-            background: "none",
-            border: "1px solid black",
-            borderRadius: "4px",
-            fontSize: "14px",
-            lineHeight: "32px",
-          }}
-        >
-          Cancel
-        </button> */}
         <button
-          // href="#contained-buttons"
           onClick={saveChanges}
           style={{
             backgroundColor: "#FFB81C",

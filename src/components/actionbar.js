@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Typography from "@mui/material/Typography";
 // import { Button, CardActionArea, CardActions } from '@mui/material';
 import Grid from "@mui/material/Grid";
@@ -14,8 +14,8 @@ import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
 // import DownloadIcon from "@mui/icons-material/Download";
-import {BsWindows} from "react-icons/bs";
-import {BsApple} from "react-icons/bs";
+import { BsWindows } from "react-icons/bs";
+import { BsApple } from "react-icons/bs";
 
 import { BsFileEarmarkTextFill } from "react-icons/bs";
 import { useEmailTemplate } from "../context/email-template";
@@ -72,8 +72,17 @@ const buttonSpan = {
 };
 
 export function ActionBar() {
+  // const filename = useRef("Untitled");
   const [filename, setFileName] = useState("Untitled");
-  const { setShowVal, arr, setConfirmation } = useContext(Contentcontext);
+  const { emailTemplate } = useEmailTemplate();
+  const { setShowVal, arr, setConfirmation, footerTheme, alignment } =
+    useContext(Contentcontext);
+  // function onChangeHandler(e) {
+  //   setFileName(e.target.value);
+  // };
+  useEffect(() => {
+    return setFileName((prev) => prev);
+  }, [filename]);
 
   const sendEmail = async (platform) => {
     await setShowVal(false);
@@ -81,13 +90,13 @@ export function ActionBar() {
     // try {
     //   const useOs = navigator.userAgentData.platform;
 
-    //   
+    //
     // } catch {
     //   fileType = navigator.platform === "Windows" ? "eml" : "emltpl";
     // }
-    fileType = platform === "pc" ? "eml" : "emltpl";
-    console.log("Sendign email");
-    console.log(document.querySelector("#finalTemplate").innerHTML);
+    fileType = platform === "Win" ? "eml" : "emltpl";
+    // console.log("Sendign email");
+    // console.log(document.querySelector("#finalTemplate").innerHTML);
     let emailData = document.querySelector("#finalTemplate").innerHTML;
     // console.log(emailData);
     // setShowVal(false);
@@ -95,7 +104,6 @@ export function ActionBar() {
     let emailto = null;
     let emailsubject = null;
     let emlCont = null;
-    console.log(mailHtm);
     mailHtm = `${emailData}`;
 
     emailto = "";
@@ -110,11 +118,14 @@ export function ActionBar() {
     emlCont += "" + "\n";
 
     emlCont += mailHtm;
-    console.log(emlCont, "i am the emCont");
+    emlCont += "" + "\n";
+    const jsonContent = JSON.stringify(arr, null, 2);
+    emlCont += `<!--${emailTemplate.darkMode}+${alignment}seperate${jsonContent}seperate${footerTheme}-->`;
+    // console.log(emlCont, "i am the emCont");
     let textFile = null;
     let EMLFileData_12 = null;
     EMLFileData_12 = new Blob([emlCont], { type: "text/plain" });
-    console.log(EMLFileData_12, "I am the data");
+    // console.log(EMLFileData_12, "I am the data");
     if (textFile !== null) {
       window.URL.createObjectURL(textFile);
     }
@@ -129,7 +140,7 @@ export function ActionBar() {
     a.href = textFile;
 
     a.id = "fileLink";
-    a.download = emailsubject + `.${fileType}`; //'filenameTest.eml' ;
+    a.download = emailsubject + ` (${platform})` + `.${fileType}`; //'filenameTest.eml' ;
     a.style.visibility = "hidden";
 
     document.body.appendChild(a);
@@ -161,17 +172,21 @@ export function ActionBar() {
           <span
             style={{ fontSize: "14px", fontWeight: "400", color: "#B2B2B3" }}
           >
-            File Name:
+            File Name <span style={{ color: "red" }}> * </span>:
           </span>
           {/* <span style={{ fontSize: "18px", fontWeight: "500" }}>
           Win Announcement
         </span> */}
           <input
             type="text"
+            // ref={filename}
             value={filename}
             placeholder="Win Announcement"
             style={inputStyle}
-            onChange={(e) => setFileName(e.target.value)}
+            onChange={(e) => {
+              setFileName(e.target.value);
+              // filename.current = e.target.ref;
+            }}
           />
         </div>
         <div style={{ display: "flex", gap: "12px" }}>
@@ -206,19 +221,29 @@ export function ActionBar() {
               Clear
             </button>
           )}
-          <button style={sendButtonStyle} onClick={()=>{sendEmail("pc")}}>
+          <button
+            style={sendButtonStyle}
+            onClick={() => {
+              sendEmail("Win");
+            }}
+          >
             <div style={buttonText}>
               <span>Download</span>
-              <span style={buttonSpan}>For PC</span>
+              <span style={buttonSpan}>For Win</span>
             </div>
-            <BsWindows size="20px" style={{marginLeft:"19px"}}/>
+            <BsWindows size="20px" style={{ marginLeft: "19px" }} />
           </button>
-          <button style={sendButtonStyle} onClick={()=>{sendEmail("mac")}}>
+          <button
+            style={sendButtonStyle}
+            onClick={() => {
+              sendEmail("Mac");
+            }}
+          >
             <div style={buttonText}>
               <span>Download</span>
               <span style={buttonSpan}>For Mac</span>
             </div>
-            <BsApple size="20px" style={{marginLeft:"19px"}}/>
+            <BsApple size="20px" style={{ marginLeft: "19px" }} />
           </button>
         </div>
       </div>

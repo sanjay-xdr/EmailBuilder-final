@@ -57,24 +57,18 @@ const Confirmation = ({ value }) => {
 
     width: "11.5rem",
 
-    color: "#ffffff"
+    color: "#ffffff",
   };
 
   return (
     <div
       style={{
         boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
-
         backgroundColor: "#ffffff", // textAlign: "center",
-
         width: "30rem",
-
         zIndex: "100",
-
         position: "fixed",
-
         top: "20vh",
-
         left: "calc(50% - 15rem)",
       }}
     >
@@ -82,17 +76,11 @@ const Confirmation = ({ value }) => {
       <div
         style={{
           width: "25rem",
-
           display: "flex",
-
           flexDirection: "column",
-
           justifyContent: "center",
-
           alignItems: "center",
-
           margin: "auto",
-
           marginBottom: "32px", // border: "1px solid black",
         }}
       >
@@ -102,11 +90,8 @@ const Confirmation = ({ value }) => {
         <div
           style={{
             fontSize: "20px",
-
             lineHeight: "150%",
-
             fontWeight: "600",
-
             marginBottom: "8px",
           }}
         >
@@ -115,24 +100,19 @@ const Confirmation = ({ value }) => {
         <div
           style={{
             fontSize: "16px",
-
             lineHeight: "20px",
-
             textAlign: "center", //374px
-
             width: "23rem",
-
             marginBottom: "24px",
           }}
         >
-          Your data will be permanently deleted. Are you sure you want to proceed?"
+          Your data will be permanently deleted. Are you sure you want to
+          proceed?"
         </div>
         <div
           style={{
             display: "flex",
-
             flexDirection: "row",
-
             gap: "16px",
 
             justifyContent: "right", // border: "1px solid green",

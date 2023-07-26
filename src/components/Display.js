@@ -18,7 +18,7 @@ const Display = () => {
         // minHeight: "100%",
         // maxHeight: "100%",
         position: "relative",
-        overflow: "auto",
+        overflow: "hidden",
         // border: "1px solid black",
       }}
     >
@@ -34,7 +34,7 @@ const Display = () => {
       >
         <ActionBar />
       </div>
-      <div style={{ width: "736px" }}>
+      <div style={{ width: "736px",overflow:"auto" }}>
         <Template />
       </div>
     </div>
